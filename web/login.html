@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html> 
+<head>
+	<style>
+		.validationError {
+			display: none;
+			color: red;			
+		}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	<script >
+			function login() {			
+				$('#loginUnsuccessful').hide();
+				
+				if (!$('#Username').val()) {
+					$('#userError').show();
+					return;
+				} else {
+					$('#userError').hide();					
+				}
+				
+				if (!$('#Password').val()) {
+					$('#passwordError').show();
+					return;
+				} else {
+					$('#passwordError').hide();					
+				}
+			
+				const formData = $('#login_form');
+				
+				$.ajax({
+					type: 'POST',
+					url: 'https://localhost:7225/login/',
+					contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+					data: formData.serialize()
+				}).done(RedirectToWelcomePage);
+			}
+			
+			function RedirectToWelcomePage(data){
+				console.log(data);
+				
+				if (data === true) {
+					window.location.href = "welcome.html";
+				} else {
+					$('#loginUnsuccessful').show();
+				}
+			}
+
+	</script>
+</head>
+
+</body>
+    <form id="login_form" >
+	
+		<label for="Username"> Username: </label>
+		<input type="text" id="Username" name="username" />
+		<p id="userError" class="validationError">Invalid username</p>
+		<br>
+		<br>
+
+		<label for="Password"> Password: </label>
+		<input type="password" id="Password" name="password"/>
+		<p id="passwordError" class="validationError">Invalid password</p>
+
+		<p id="loginUnsuccessful" class="validationError">Incorrect username or password</p>
+	</form>
+
+ 
+	<br>
+	<br>
+
+	<button id="login"  onclick="login()">Login</button>
+</body>
+</html>

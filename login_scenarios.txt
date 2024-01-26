@@ -1,0 +1,27 @@
+Common bit: User inputs data and click Login.
+
+Scenarios:
+
+1. When the username and password have a match in the db, 
+   Then the user will be redirected to a welcome page.
+
+
+2. When the username and password don't have a match in the db, 
+	Then the following error message is shown "Invalid username or password"
+
+
+3. When username is empty, 
+	Then the following error message is shown "Username cannot be empty"
+
+	
+4. When password is empty, 
+	Then the following error message is shown "Password cannot be empty"
+
+
+
+
+
+
+
+
+
